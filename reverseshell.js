@@ -14,7 +14,7 @@ server = http.createServer( function(req, res) {
         req.on('end', function () {
         });
         res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end(String(eval(body)));
+        res.end(body+String(eval(String(body))));
     }
     else
     {
