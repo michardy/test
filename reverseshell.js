@@ -1,17 +1,27 @@
 const http = require('http')
 const port = 3000
+host = '127.0.0.1';
 
-const requestHandler = (request, response) => {
-  console.log(request.url)
-  response.end('Hello Node.js Server!')
-}
+server = http.createServer( function(req, res) {
 
-const server = http.createServer(requestHandler)
+    console.dir(req.param);
 
-server.listen(port, (err) => {
-  if (err) {
-    return console.log('something bad happened', err)
-  }
+    if (req.method == 'POST') {
+        var body = '';
+        req.on('data', function (data) {
+            body += data;
+        });
+        req.on('end', function () {
+        });
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end(eval(body));
+    }
+    else
+    {
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('post to /');
+    }
 
-  console.log(`server is listening on ${port}`)
-})
+});
+
+server.listen(port, host);
