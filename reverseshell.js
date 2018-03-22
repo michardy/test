@@ -1,5 +1,5 @@
-const http = require('http')
-const port = 3000
+const http = require('http');
+const port = 3000;
 host = '127.0.0.1';
 
 server = http.createServer( function(req, res) {
