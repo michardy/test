@@ -9,12 +9,12 @@ server = http.createServer( function(req, res) {
     if (req.method == 'POST') {
         var body = '';
         req.on('data', function (data) {
-            body += data;
+            body += String(data);
         });
         req.on('end', function () {
+            res.writeHead(200, {'Content-Type': 'text/plain'});
+            res.end(String(eval(String(body))));
         });
-        res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.end(body+String(eval(String(body))));
     }
     else
     {
